@@ -1,0 +1,55 @@
+TAREA1_AGENCIA
+ 
+MySQL  localhost:3306 ssl  agencia  SQL > create table vendedor (clave key auto_increment,
+                                        -> apellidos varchar(50) not null,
+                                        -> nombre varchar(50) not null,
+                                        -> RFC unique not null,
+                                        -> comision enum('3','5','10') not null);
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'key auto_increment,
+apellidos varchar(50) not null,
+nombre varchar(50) not null,' at line 1
+ MySQL  localhost:3306 ssl  agencia  SQL > create table vendedor (clave int key auto_increment, apellidos varchar(50) not null, nombre varchar(50) not null, RFC unique not null, comision enum('3','5','10') not null);
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'unique not null, comision enum('3','5','10') not null)' at line 1
+ MySQL  localhost:3306 ssl  agencia  SQL > create table vendedor (clave int key auto_increment, apellidos varchar(50) not null, nombre varchar(50) not null, RFC unique key not null, comision enum('3','5','10') not null);
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'unique key not null, comision enum('3','5','10') not null)' at line 1
+ MySQL  localhost:3306 ssl  agencia  SQL > create table vendedor (clave int key auto_increment, apellidos varchar(50) not null, nombre varchar(50) not null, RFC varchar(50) unique not null, comision enum('3','5','10') not null);
+Query OK, 0 rows affected (0.0478 sec)
+ MySQL  localhost:3306 ssl  agencia  SQL > desc vendedor;
++-----------+--------------------+------+-----+---------+----------------+
+| Field     | Type               | Null | Key | Default | Extra          |
++-----------+--------------------+------+-----+---------+----------------+
+| clave     | int                | NO   | PRI | NULL    | auto_increment |
+| apellidos | varchar(50)        | NO   |     | NULL    |                |
+| nombre    | varchar(50)        | NO   |     | NULL    |                |
+| RFC       | varchar(50)        | NO   | UNI | NULL    |                |
+| comision  | enum('3','5','10') | NO   |     | NULL    |                |
++-----------+--------------------+------+-----+---------+----------------+
+5 rows in set (0.0016 sec)
+ MySQL  localhost:3306 ssl  agencia  SQL > change rfc (varchar(13));
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'rfc (varchar(13))' at line 1
+ MySQL  localhost:3306 ssl  agencia  SQL > change rfc (unique varchar(13) not null);
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'rfc (unique varchar(13) not null)' at line 1
+ MySQL  localhost:3306 ssl  agencia  SQL > create table Cliente(id int key auto_increment not null,
+                                        -> apellidos varchar(50) not null,
+                                        -> nombre varchar(50) not null,
+                                        -> tipo cliente enum("Fisica","Moral"),
+                                        -> razon social varchar(50),
+                                        -> RFC varchar(50) unique not null);
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'cliente enum("Fisica","Moral"),
+razon social varchar(50),
+RFC varchar(50) uniqu' at line 4
+ MySQL  localhost:3306 ssl  agencia  SQL > create table Cliente(id int key auto_increment not null, apellidos varchar(50) not null, nombre varchar(50) not null, TipoCliente enum("Fisica","Moral"), RazonSocial varchar(50),  RFC varchar(50) unique not null);
+Query OK, 0 rows affected (0.0319 sec)
+ MySQL  localhost:3306 ssl  agencia  SQL > desc cliente;
++-------------+------------------------+------+-----+---------+----------------+
+| Field       | Type                   | Null | Key | Default | Extra          |
++-------------+------------------------+------+-----+---------+----------------+
+| id          | int                    | NO   | PRI | NULL    | auto_increment |
+| apellidos   | varchar(50)            | NO   |     | NULL    |                |
+| nombre      | varchar(50)            | NO   |     | NULL    |                |
+| TipoCliente | enum('Fisica','Moral') | YES  |     | NULL    |                |
+| RazonSocial | varchar(50)            | YES  |     | NULL    |                |
+| RFC         | varchar(50)            | NO   | UNI | NULL    |                |
++-------------+------------------------+------+-----+---------+----------------+
+6 rows in set (0.0015 sec)
+ MySQL  localhost:3306 ssl  agencia  SQL >

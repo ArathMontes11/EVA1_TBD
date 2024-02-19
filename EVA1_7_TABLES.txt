@@ -1,0 +1,251 @@
+MySQL Shell 8.3.0
+
+Copyright (c) 2016, 2023, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+ MySQL  SQL > \connect --mc root@localhost;
+Creating a Classic session to 'root@localhost;'
+Please provide the password for 'root@localhost;': ***********
+MySQL Error 2005 (HY000): Unknown MySQL server host 'localhost;' (11001)
+ MySQL  SQL > \connect --mc root@localhost;
+Creating a Classic session to 'root@localhost;'
+Please provide the password for 'root@localhost;':
+MySQL Error 2005 (HY000): Unknown MySQL server host 'localhost;' (11001)
+ MySQL  SQL > \show users;
+Unknown report: users;
+ MySQL  SQL > \show
+Available reports: query, thread, threads.
+ MySQL  SQL > \show query;
+Unknown report: query;
+ MySQL  SQL > \show query
+query: report is expecting 1-* arguments, 0 provided. For usage information please run: \show query --help
+ MySQL  SQL > \show query --help
+NAME
+      query - Executes the SQL statement given as arguments.
+
+SYNTAX
+      \show query [OPTIONS] [ARGS]
+      \watch query [OPTIONS] [ARGS]
+
+DESCRIPTION
+      Options:
+
+      --help, -h  Display this help and exit.
+
+      --vertical, -E
+                  Display records vertically.
+
+      Arguments:
+
+      This report accepts 1-* arguments.
+ MySQL  SQL > \connect;
+Unknown command: '\connect;'
+ MySQL  SQL > \connect --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 8
+Server version: 8.0.36 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > use estudiantes;
+MySQL Error 1049: Unknown database 'estudiantes'
+ MySQL  localhost:3306 ssl  SQL > use estudiantes
+MySQL Error 1049: Unknown database 'estudiantes'
+ MySQL  localhost:3306 ssl  SQL > use estudiante
+MySQL Error 1049: Unknown database 'estudiante'
+ MySQL  localhost:3306 ssl  SQL > \use estudiantes
+MySQL Error 1049: Unknown database 'estudiantes'
+ MySQL  localhost:3306 ssl  SQL > \use estudiantes;
+MySQL Error 1049: Unknown database 'estudiantes'
+ MySQL  localhost:3306 ssl  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| tbd_1              |
+| world              |
++--------------------+
+7 rows in set (0.0022 sec)
+ MySQL  localhost:3306 ssl  SQL > use tbd_1
+Default schema set to `tbd_1`.
+Fetching global names, object names from `tbd_1` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  tbd_1  SQL > c
+                                      -> ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'c' at line 1
+ MySQL  localhost:3306 ssl  tbd_1  SQL > show tables;
++-----------------+
+| Tables_in_tbd_1 |
++-----------------+
+| estudiantes     |
++-----------------+
+1 row in set (0.0011 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > create table personal
+                                      -> ;
+ERROR: 4028 (HY000): A table must have at least one visible column.
+ MySQL  localhost:3306 ssl  tbd_1  SQL > create table playeras (id int auto key, nombre varchar(50),
+                                      -> talla ; not null
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'auto key, nombre varchar(50),
+talla' at line 1
+                                      -> create table playeras (id int auto_increment key, nombre varchar(50) not null, talla varchar(50) not null, tipo varchar(50) not null);
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'not null
+create table playeras (id int auto_increment key, nombre varchar(50) n' at line 1
+ MySQL  localhost:3306 ssl  tbd_1  SQL > not null  create table playeras (id int auto_increment key, nombre varchar(50) not null, talla varchar(50) not null, tipo varchar(50) not null);
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'not null  create table playeras (id int auto_increment key, nombre varchar(50) n' at line 1
+ MySQL  localhost:3306 ssl  tbd_1  SQL > create table playeras (id int auto_increment key, nombre varchar(50) not null, talla varchar(50) not null, tipo varchar(50) not null);
+Query OK, 0 rows affected (0.0293 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > show tablas;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'tablas' at line 1
+ MySQL  localhost:3306 ssl  tbd_1  SQL > show tables
+                                      -> ;
++-----------------+
+| Tables_in_tbd_1 |
++-----------------+
+| estudiantes     |
+| playeras        |
++-----------------+
+2 rows in set (0.0012 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > desc playeras;
++--------+-------------+------+-----+---------+----------------+
+| Field  | Type        | Null | Key | Default | Extra          |
++--------+-------------+------+-----+---------+----------------+
+| id     | int         | NO   | PRI | NULL    | auto_increment |
+| nombre | varchar(50) | NO   |     | NULL    |                |
+| talla  | varchar(50) | NO   |     | NULL    |                |
+| tipo   | varchar(50) | NO   |     | NULL    |                |
++--------+-------------+------+-----+---------+----------------+
+4 rows in set (0.0034 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > insert into playeras(nombre, talla, tipo)
+                                      -> values("Playerota", "L", "Polo");
+Query OK, 1 row affected (0.0108 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > insert into playeras(nombre, talla, tipo) values("Playerototota", "Extra Grande", "Polote");
+
+Query OK, 1 row affected (0.0041 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > insert into playeras(nombre, talla, tipo) values("Playerotototototota", "XL", "Cuello Redondo");
+Query OK, 1 row affected (0.0025 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > select * from;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+ MySQL  localhost:3306 ssl  tbd_1  SQL > select * from playeras;
++----+---------------------+--------------+----------------+
+| id | nombre              | talla        | tipo           |
++----+---------------------+--------------+----------------+
+|  1 | Playerota           | L            | Polo           |
+|  2 | Playerototota       | Extra Grande | Polote         |
+|  3 | Playerotototototota | XL           | Cuello Redondo |
++----+---------------------+--------------+----------------+
+3 rows in set (0.0014 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > delete from playeras;
+Query OK, 3 rows affected (0.0060 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > desc playeras;
++--------+-------------+------+-----+---------+----------------+
+| Field  | Type        | Null | Key | Default | Extra          |
++--------+-------------+------+-----+---------+----------------+
+| id     | int         | NO   | PRI | NULL    | auto_increment |
+| nombre | varchar(50) | NO   |     | NULL    |                |
+| talla  | varchar(50) | NO   |     | NULL    |                |
+| tipo   | varchar(50) | NO   |     | NULL    |                |
++--------+-------------+------+-----+---------+----------------+
+4 rows in set (0.0024 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > alter table playeras
+                                      -> modify talla enum("XS","S","M","L","XL","XXL");
+Query OK, 0 rows affected (0.0553 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  tbd_1  SQL > desc playeras
+                                      -> ;
++--------+-----------------------------------+------+-----+---------+----------------+
+| Field  | Type                              | Null | Key | Default | Extra          |
++--------+-----------------------------------+------+-----+---------+----------------+
+| id     | int                               | NO   | PRI | NULL    | auto_increment |
+| nombre | varchar(50)                       | NO   |     | NULL    |                |
+| talla  | enum('XS','S','M','L','XL','XXL') | YES  |     | NULL    |                |
+| tipo   | varchar(50)                       | NO   |     | NULL    |                |
++--------+-----------------------------------+------+-----+---------+----------------+
+4 rows in set (0.0022 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > insert into playeras(nombre, talla, tipo) values("Playerototota", "Extra Grande", "Polote");
+
+ERROR: 1265 (01000): Data truncated for column 'talla' at row 1
+ MySQL  localhost:3306 ssl  tbd_1  SQL > insert into playeras(nombre, talla, tipo) values("Playerota", "L", "Polo");
+Query OK, 1 row affected (0.0043 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > insert into playeras(nombre, talla, tipo) values("Playerotototototota", "xl", "Cuello Redondo");
+Query OK, 1 row affected (0.0038 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > insert into playeras values(1,"Playerita", "xl", "Cuello Redondo");
+Query OK, 1 row affected (0.0042 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > insert into playeras values(2,"Playerita", "xs", "Cuello Redondo");
+Query OK, 1 row affected (0.0045 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > insert into playeras values(3,"Playerita", "s", "Cuello Redondo");
+Query OK, 1 row affected (0.0040 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > select * from playeras
+                                      -> ;
++----+---------------------+-------+----------------+
+| id | nombre              | talla | tipo           |
++----+---------------------+-------+----------------+
+|  1 | Playerita           | XL    | Cuello Redondo |
+|  2 | Playerita           | XS    | Cuello Redondo |
+|  3 | Playerita           | S     | Cuello Redondo |
+|  4 | Playerota           | L     | Polo           |
+|  5 | Playerotototototota | XL    | Cuello Redondo |
++----+---------------------+-------+----------------+
+5 rows in set (0.0009 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > delete from table playeras;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table playeras' at line 1
+ MySQL  localhost:3306 ssl  tbd_1  SQL > delete from playeras;
+Query OK, 5 rows affected (0.0040 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > alter table playeras  modify tipo enum("Basic","Polo","Camisa","Sudadera","Sueter");
+Query OK, 0 rows affected (0.0477 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  tbd_1  SQL > desc Playeras
+                                      -> ;
++--------+---------------------------------------------------+------+-----+---------+----------------+
+| Field  | Type                                              | Null | Key | Default | Extra          |
++--------+---------------------------------------------------+------+-----+---------+----------------+
+| id     | int                                               | NO   | PRI | NULL    | auto_increment |
+| nombre | varchar(50)                                       | NO   |     | NULL    |                |
+| talla  | enum('XS','S','M','L','XL','XXL')                 | YES  |     | NULL    |                |
+| tipo   | enum('Basic','Polo','Camisa','Sudadera','Sueter') | YES  |     | NULL    |                |
++--------+---------------------------------------------------+------+-----+---------+----------------+
+4 rows in set (0.0023 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > drop playeras;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'playeras' at line 1
+ MySQL  localhost:3306 ssl  tbd_1  SQL > create database agencia;
+Query OK, 1 row affected (0.0059 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > use agencia
+Default schema set to `agencia`.
+Fetching global names, object names from `agencia` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  agencia  SQL > create table automovil (id int auto_increment key,
+                                        -> marca varchar(50) not null,
+                                        -> modelo varchar(50) not null,
+                                        -> año not null,
+                                        -> precio not null,
+                                        -> check(año>1900),
+                                        -> check(año<2025),
+                                        -> check(precio>0));
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'not null,
+precio not null,
+check(año>1900),
+check(año<2025),
+check(precio>0))' at line 4
+ MySQL  localhost:3306 ssl  agencia  SQL > create table automovil (id int auto_increment key, marca varchar(50) not null, modelo varchar(50) not null, año varchar(50) not null, precio varchar(50) not null, check(año>1900), check(año<2025), check(precio>0));
+Query OK, 0 rows affected (0.0246 sec)
+ MySQL  localhost:3306 ssl  agencia  SQL > desc automovil
+                                        -> ;
++--------+-------------+------+-----+---------+----------------+
+| Field  | Type        | Null | Key | Default | Extra          |
++--------+-------------+------+-----+---------+----------------+
+| id     | int         | NO   | PRI | NULL    | auto_increment |
+| marca  | varchar(50) | NO   |     | NULL    |                |
+| modelo | varchar(50) | NO   |     | NULL    |                |
+| año    | varchar(50) | NO   |     | NULL    |                |
+| precio | varchar(50) | NO   |     | NULL    |                |
++--------+-------------+------+-----+---------+----------------+
+5 rows in set (0.0029 sec)
+ MySQL  localhost:3306 ssl  agencia  SQL > insert into automovil values(1, "volvo", "no se", 1800, 0);
+ERROR: 3819 (HY000): Check constraint 'automovil_chk_1' is violated.
+ MySQL  localhost:3306 ssl  agencia  SQL >
