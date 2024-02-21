@@ -1,0 +1,271 @@
+EVA1_4_CREATE TABLE
+
+MySQL Shell 8.3.0
+
+Copyright (c) 2016, 2023, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+ MySQL  SQL > \connect --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 32
+Server version: 8.0.36 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > use tbd_1
+Default schema set to `tbd_1`.
+Fetching global names, object names from `tbd_1` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  tbd_1  SQL > show tables;
++-----------------+
+| Tables_in_tbd_1 |
++-----------------+
+| estudiante      |
++-----------------+
+1 row in set (0.0025 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > desc estudiante;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| id        | int         | YES  |     | NULL    |       |
+| nombre    | varchar(50) | YES  |     | NULL    |       |
+| apellidos | varchar(50) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.0098 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > inser into estudiante
+                                      -> values(1,"ARTURO","HERNANDEZ");
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'inser into estudiante
+values(1,"ARTURO","HERNANDEZ")' at line 1
+ MySQL  localhost:3306 ssl  tbd_1  SQL > inser into estudiante values (1,"ARTURO","HERNANDEZ");
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'inser into estudiante values (1,"ARTURO","HERNANDEZ")' at line 1
+ MySQL  localhost:3306 ssl  tbd_1  SQL > insert into estudiante values(1,"ARTURO","HERNANDEZ");
+Query OK, 1 row affected (0.0049 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > show tables;
++-----------------+
+| Tables_in_tbd_1 |
++-----------------+
+| estudiante      |
++-----------------+
+1 row in set (0.0020 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > desc estudiante;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| id        | int         | YES  |     | NULL    |       |
+| nombre    | varchar(50) | YES  |     | NULL    |       |
+| apellidos | varchar(50) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.0020 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > insert into estudiante(id) values(2);
+Query OK, 1 row affected (0.0104 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > desc estudiante;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| id        | int         | YES  |     | NULL    |       |
+| nombre    | varchar(50) | YES  |     | NULL    |       |
+| apellidos | varchar(50) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.0022 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > select * from estudiante;
++----+--------+-----------+
+| id | nombre | apellidos |
++----+--------+-----------+
+|  1 | ARTURO | HERNANDEZ |
+|  2 | NULL   | NULL      |
++----+--------+-----------+
+2 rows in set (0.0008 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > select id from estudiante;
++----+
+| id |
++----+
+|  1 |
+|  2 |
++----+
+2 rows in set (0.0007 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > select * from estudiante;
++----+--------+-----------+
+| id | nombre | apellidos |
++----+--------+-----------+
+|  1 | ARTURO | HERNANDEZ |
+|  2 | NULL   | NULL      |
++----+--------+-----------+
+2 rows in set (0.0008 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > drop database tbd_1;
+Query OK, 1 row affected (0.0215 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > use sakila
+Default schema set to `sakila`.
+Fetching global names, object names from `sakila` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  sakila  SQL > use tbd_1
+MySQL Error 1049: Unknown database 'tbd_1'
+ MySQL  localhost:3306 ssl  sakila  SQL > create database tbd_1
+                                       -> ;
+Query OK, 1 row affected (0.0099 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > use tbd_1
+Default schema set to `tbd_1`.
+Fetching global names, object names from `tbd_1` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  tbd_1  SQL > create table estudiantes (id int auto_increment,nombre varchar(50) not null, apellido varchar(50)
+                                      -> ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+ MySQL  localhost:3306 ssl  tbd_1  SQL > create table estudiantes (id int auto_increment
+                                      -> , nombre varcahr(50),
+                                      -> apellido ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varcahr(50),
+apellido' at line 2
+ MySQL  localhost:3306 ssl  tbd_1  SQL > create table estudiantes (id int auto_increment,nombre varchar(50) not null, apellido varchar(50) not null);
+ERROR: 1075 (42000): Incorrect table definition; there can be only one auto column and it must be defined as a key
+ MySQL  localhost:3306 ssl  tbd_1  SQL > create table estudiantes (id int auto_increment key, nombre varchar(50) not null, apellido varchar(50) not null);
+Query OK, 0 rows affected (0.0280 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > show tables;
++-----------------+
+| Tables_in_tbd_1 |
++-----------------+
+| estudiantes     |
++-----------------+
+1 row in set (0.0019 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > select * from estudiantes;
+Empty set (0.0025 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > desc estudiante;
+ERROR: 1146 (42S02): Table 'tbd_1.estudiante' doesn't exist
+ MySQL  localhost:3306 ssl  tbd_1  SQL > desc estudiantes;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int         | NO   | PRI | NULL    | auto_increment |
+| nombre   | varchar(50) | NO   |     | NULL    |                |
+| apellido | varchar(50) | NO   |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+3 rows in set (0.0023 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > drop database tbd_1;
+Query OK, 1 row affected (0.0192 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > create database tbd_1 ;
+Query OK, 1 row affected (0.0100 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > use tbd_1
+Default schema set to `tbd_1`.
+Fetching global names, object names from `tbd_1` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  tbd_1  SQL > create table estudiantes (id int auto_increment key, nombre(s) varchar(50) not null, apellidos varchar(50) not null);
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(s) varchar(50) not null, apellidos varchar(50) not null)' at line 1
+ MySQL  localhost:3306 ssl  tbd_1  SQL > create table estudiantes (id int auto_increment key, nombres varchar(50) not null, apellidos varchar(50) not null);
+Query OK, 0 rows affected (0.0254 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > desc estudiantes;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| id        | int         | NO   | PRI | NULL    | auto_increment |
+| nombres   | varchar(50) | NO   |     | NULL    |                |
+| apellidos | varchar(50) | NO   |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+3 rows in set (0.0026 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > insert into estudiante values(1,"RUBEN ARTURO","HERNANDEZ PRIETO");
+ERROR: 1146 (42S02): Table 'tbd_1.estudiante' doesn't exist
+ MySQL  localhost:3306 ssl  tbd_1  SQL > insert into estudiantes values(1,"RUBEN ARTURO","HERNANDEZ PRIETO");
+Query OK, 1 row affected (0.0091 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > desc estudiantes
+                                      -> ;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| id        | int         | NO   | PRI | NULL    | auto_increment |
+| nombres   | varchar(50) | NO   |     | NULL    |                |
+| apellidos | varchar(50) | NO   |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+3 rows in set (0.0022 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > select * from estudiantes;
++----+--------------+------------------+
+| id | nombres      | apellidos        |
++----+--------------+------------------+
+|  1 | RUBEN ARTURO | HERNANDEZ PRIETO |
++----+--------------+------------------+
+1 row in set (0.0007 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > insert into estudiantes (nombres, apellidos) values("PEDRO", "PICAPIEDRA");
+Query OK, 1 row affected (0.0098 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > select * from estudiantes;
++----+--------------+------------------+
+| id | nombres      | apellidos        |
++----+--------------+------------------+
+|  1 | RUBEN ARTURO | HERNANDEZ PRIETO |
+|  2 | PEDRO        | PICAPIEDRA       |
++----+--------------+------------------+
+2 rows in set (0.0007 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > insert into estudiantes values(5,"ANTONIO","STARK");
+Query OK, 1 row affected (0.0089 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > insert into estudiantes (nombres, apellidos) values("JULIO", "REGALADO");
+Query OK, 1 row affected (0.0110 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > select * from estudiantes;
++----+--------------+------------------+
+| id | nombres      | apellidos        |
++----+--------------+------------------+
+|  1 | RUBEN ARTURO | HERNANDEZ PRIETO |
+|  2 | PEDRO        | PICAPIEDRA       |
+|  5 | ANTONIO      | STARK            |
+|  6 | JULIO        | REGALADO         |
++----+--------------+------------------+
+4 rows in set (0.0008 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > insert into estudiantes (nombres, apellidos) values("JULIO", "REGALADO");
+Query OK, 1 row affected (0.0036 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > select * from estudiantes;
++----+--------------+------------------+
+| id | nombres      | apellidos        |
++----+--------------+------------------+
+|  1 | RUBEN ARTURO | HERNANDEZ PRIETO |
+|  2 | PEDRO        | PICAPIEDRA       |
+|  5 | ANTONIO      | STARK            |
+|  6 | JULIO        | REGALADO         |
+|  7 | JULIO        | REGALADO         |
++----+--------------+------------------+
+5 rows in set (0.0008 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > insert into estudiantes values(5,"ANTONIO","STARK");
+ERROR: 1062 (23000): Duplicate entry '5' for key 'estudiantes.PRIMARY'
+ MySQL  localhost:3306 ssl  tbd_1  SQL > select * from estudiantes;
++----+--------------+------------------+
+| id | nombres      | apellidos        |
++----+--------------+------------------+
+|  1 | RUBEN ARTURO | HERNANDEZ PRIETO |
+|  2 | PEDRO        | PICAPIEDRA       |
+|  5 | ANTONIO      | STARK            |
+|  6 | JULIO        | REGALADO         |
+|  7 | JULIO        | REGALADO         |
++----+--------------+------------------+
+5 rows in set (0.0007 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > delete from estudiantes where id=7;
+Query OK, 1 row affected (0.0072 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > select * from estudiantes;
++----+--------------+------------------+
+| id | nombres      | apellidos        |
++----+--------------+------------------+
+|  1 | RUBEN ARTURO | HERNANDEZ PRIETO |
+|  2 | PEDRO        | PICAPIEDRA       |
+|  5 | ANTONIO      | STARK            |
+|  6 | JULIO        | REGALADO         |
++----+--------------+------------------+
+4 rows in set (0.0007 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > insert into estudiantes (nombres, apellidos) values("PEDRITO", "SOLA");
+Query OK, 1 row affected (0.0085 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > select * from estudiantes;
++----+--------------+------------------+
+| id | nombres      | apellidos        |
++----+--------------+------------------+
+|  1 | RUBEN ARTURO | HERNANDEZ PRIETO |
+|  2 | PEDRO        | PICAPIEDRA       |
+|  5 | ANTONIO      | STARK            |
+|  6 | JULIO        | REGALADO         |
+|  8 | PEDRITO      | SOLA             |
++----+--------------+------------------+
+5 rows in set (0.0007 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > insert into estudiantes values(7,"BRUCE","BANNER");
+Query OK, 1 row affected (0.0085 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL > select * from estudiantes;
++----+--------------+------------------+
+| id | nombres      | apellidos        |
++----+--------------+------------------+
+|  1 | RUBEN ARTURO | HERNANDEZ PRIETO |
+|  2 | PEDRO        | PICAPIEDRA       |
+|  5 | ANTONIO      | STARK            |
+|  6 | JULIO        | REGALADO         |
+|  7 | BRUCE        | BANNER           |
+|  8 | PEDRITO      | SOLA             |
++----+--------------+------------------+
+6 rows in set (0.0008 sec)
+ MySQL  localhost:3306 ssl  tbd_1  SQL >
